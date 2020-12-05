@@ -5,6 +5,14 @@ export const dateToStr = (data) => {
     return new Date(data).toLocaleDateString('es-ES', {year: "numeric", month: "2-digit", day: "2-digit"});
 }
 
+export const dateTimeToStr = (data) => {
+    if (data === null || data === undefined)
+        return "";
+    return new Date(data).toLocaleDateString('es-ES', {year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+    });
+}
+
 export const boolToStr = (data) => {
     if (data === null || data === undefined)
         return "";

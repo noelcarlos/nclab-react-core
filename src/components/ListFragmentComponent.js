@@ -202,7 +202,7 @@ export default class ListFragmentComponent extends Component {
             <div className="row">
               <div className="col-md-12 form-row">
                 <button className="btn btn-primary mb-2" onClick={(e) => { this.onShowEditDialog(null); e.preventDefault(); }}>
-                    <i className="fa fa-pencil"></i> Crear
+                    <i className="fa fa-pencil"></i> Alta
                 </button>
 
                 {this.props.quickSearchFragment}
@@ -236,6 +236,12 @@ export default class ListFragmentComponent extends Component {
             </div>
 
             <FilterTagList filters={this.state.filters} onRemove={(property) => this.onRemoveFilter(property)} />
+
+            <div className="row">
+              <div className="col-md-12 form-row">
+                {this.props.quickFilterFragment}
+              </div>
+            </div>
 
            {this.props.showItemsAsTable && 
             <div className="scrollable-table-container">
