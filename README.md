@@ -4,9 +4,12 @@
 
 [![NPM](https://img.shields.io/npm/v/nclab-react-core.svg)](https://www.npmjs.com/package/nclab-react-core) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Install
+## How to install
 
 ```bash
+cd nclab-react-core
+sudo npm link
+cd [proyecto]
 npm install --save nclab-react-core
 ```
 
