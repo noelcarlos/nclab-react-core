@@ -31,3 +31,11 @@ class Example extends Component {
 ## License
 
 MIT © [Noel Hernandez](https://github.com/Noel Hernandez)
+
+## Development
+
+lanzar en cada actualizacion, para que publique.
+
+```bash
+npm install
+```
