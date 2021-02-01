@@ -11,20 +11,20 @@ class EditPopupFragmentComponent extends Component {
 
   async componentDidMount() {
     window.scrollTo(0, 0);
-    await this.onLoad();
+    if (this.props.onRef) this.props.onRef(this);
   }
 
-  onLoad = async() => {
+  onLoad = async(id) => {
     if (this.props.onLoad !== undefined) {
       try {
         this.setState({ loadState: LOADSTATE.LOADING });
-        this.props.onLoad();
+        this.props.onLoad(id);
         this.setState({ loadState: LOADSTATE.LOADED_OK });
       } catch (error) {
         this.setState({ loadState: LOADSTATE.LOADED_KO });
         this.props.dispatch(stopAsyncValidation(this.props.form, ErrorManagement.getAllErrors(error)));
-        //this.props.stopAsyncValidation(this.props.form, { _error: ErrorManagement.getMessage(error) });
       }
+      window.$('#' + this.props.form + 'Dialog').modal('show');
     }
   }
 

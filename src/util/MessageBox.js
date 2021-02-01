@@ -6,7 +6,8 @@ export default class MessageBox {
         Swal.fire({
             title: '¿Desea archivar este registro?',
             text: 'El registro podrá ser recuperado posteriormente!',
-            type: 'warning',
+            //type: 'warning',
+            animation: false,
             showCancelButton: true,
             confirmButtonText: 'Si, archivalo!',
             cancelButtonText: 'No',
@@ -20,7 +21,8 @@ export default class MessageBox {
                     Swal.fire({
                         title: 'Archivado!',
                         text: 'El registro ha sido archivado.',
-                        type: 'success',
+                        animation: false,
+                        //type: 'success',
                         confirmButtonColor: '#2bc550',
                         cancelButtonColor: '#6c757d'
                     });
@@ -33,8 +35,9 @@ export default class MessageBox {
                 if (onCancel) {
                     Promise.resolve(onCancel).then(function(value) {
                         Swal.fire({
-                            type: 'error',
+                            //type: 'error',
                             title: 'Cancelado',
+                            animation: false,
                             text: 'El registro se ha conservado',
                             confirmButtonColor: '#2bc550',
                             cancelButtonColor: '#6c757d'

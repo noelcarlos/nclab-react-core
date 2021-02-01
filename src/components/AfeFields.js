@@ -206,9 +206,10 @@ export const MenuWithIcons = ({
       {label && <label htmlFor={input.name}>{label}</label>}
 
       <input {...input} className={classError} placeholder={placeholder} type="hidden" 
-            onChange={changeEvent => { 
+            onChange={changeEvent => {     
+              console.log("input.onChange=", changeEvent.target.value);
               input.onChange(changeEvent.target.value); 
-              if (onChange!= null) onChange(changeEvent.target.value);
+              //if (onChange!= null) onChange(changeEvent.target.value);
               changeEvent.preventDefault();
              }
             } 
@@ -224,12 +225,13 @@ export const MenuWithIcons = ({
           
       </button>
       <div className="dropdown-menu">
-        {options.map( item => 
+        {options.map( (item, index) => 
           <a key={item.value} className="dropdown-item" href="/" 
             onClick={ clickEvent => {
+                const elValor = item.value;
                 if (input.onChange !== null)
-                  input.onChange(item.value); 
-                if (onChange!= null) onChange(item.value); 
+                  input.onChange(elValor); 
+                //if (onChange!= null) onChange(elValor);          
                 clickEvent.preventDefault(); 
             }}>
           <span className="mr-2">{item.label}  </span>
