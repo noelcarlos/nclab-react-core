@@ -14,10 +14,6 @@ class EditPopupFragmentComponent extends Component {
     if (this.props.onRef) this.props.onRef(this);
   }
 
-  componentDidUpdate() {
-    document.title = `You clicked ${this.state.count} times`;
-  }
-
   onLoad = async(id) => {
     if (this.props.onLoad !== undefined) {
       try {

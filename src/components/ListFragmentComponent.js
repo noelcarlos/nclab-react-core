@@ -57,16 +57,20 @@ class FilterTagList extends Component {
     );
   }
 
-};
+}
 
 export default class ListFragmentComponent extends Component {
   state = {
     loadState: LOADSTATE.LOADING,
     submitState: SUBMITSTATE.NONE,
     currentPage: 1,
-    showFilterDialog: false,
+    viewType: ListFragmentComponent.VIEW_TYPE_LIST,
     filters : { }
   }
+
+  static VIEW_TYPE_LIST = 'LIST';
+  static VIEW_TYPE_CARD = 'CARD';
+  static VIEW_TYPE_FULL = 'FULL';
 
   async componentDidMount() {
     window.scrollTo(0, 0);
@@ -178,14 +182,14 @@ export default class ListFragmentComponent extends Component {
     });
   }
 
-  setShowItemsAsTable = (newState) => {
-    if (newState != this.props.showItemsAsTable)
-      this.props.onChangeShowItemsAsTable(newState);
+  setViewType = (viewType) => {
+    if (viewType != this.props.viewType)
+      this.props.onChangeViewType(viewType);
   }
 
   render() {
 
-    const { elements, handleSubmit, error, showItemsAsTable } = this.props;
+    const { elements, handleSubmit, error } = this.props;
 
     return (
       <Fragment>
@@ -217,21 +221,33 @@ export default class ListFragmentComponent extends Component {
                 
                 {this.props.sortFragment}
 
+                {this.props.rowFragment && 
+                  <button className={classNames(["btn", {
+                    "btn-primary": this.props.viewType === ListFragmentComponent.VIEW_TYPE_LIST, 
+                    "btn-secondary": this.props.viewType !== ListFragmentComponent.VIEW_TYPE_LIST
+                    }, "ml-2", "mb-2"])} 
+                    onClick={() => this.setViewType(ListFragmentComponent.VIEW_TYPE_LIST)}>
+                      <i className="fa fa-list"></i>
+                  </button>
+                }
+                {this.props.cardFragment && 
+                  <button className={classNames(["btn", {
+                    "btn-primary": this.props.viewType === ListFragmentComponent.VIEW_TYPE_CARD, 
+                    "btn-secondary": this.props.viewType !== ListFragmentComponent.VIEW_TYPE_CARD
+                    }, "ml-2", "mb-2"])} 
+                    onClick={() => this.setViewType(ListFragmentComponent.VIEW_TYPE_CARD)}>
+                      <i className="fa fa-th-large"></i>
+                  </button>
+                }
+                {this.props.fullFragment && 
                 <button className={classNames(["btn", {
-                  "btn-primary": this.props.showItemsAsTable, 
-                  "btn-secondary": !this.props.showItemsAsTable
+                  "btn-primary": this.props.viewType === ListFragmentComponent.VIEW_TYPE_FULL, 
+                  "btn-secondary": this.props.viewType !== ListFragmentComponent.VIEW_TYPE_FULL
                   }, "ml-2", "mb-2"])} 
-                  onClick={() => this.setShowItemsAsTable(true)}>
-                    <i className="fa fa-list"></i>
-                </button>
-                <button className={classNames(["btn", {
-                  "btn-primary": !this.props.showItemsAsTable, 
-                  "btn-secondary": this.props.showItemsAsTable
-                  }, "ml-2", "mb-2"])} 
-                  onClick={() => this.setShowItemsAsTable(false)}>
+                  onClick={() => this.setViewType(ListFragmentComponent.VIEW_TYPE_FULL)}>
                     <i className="fa fa-th-large"></i>
                 </button>
-
+                }
               </div>
             </div>
 
@@ -243,7 +259,7 @@ export default class ListFragmentComponent extends Component {
               </div>
             </div>
 
-           {this.props.showItemsAsTable && 
+           {this.props.viewType === ListFragmentComponent.VIEW_TYPE_LIST && this.props.rowFragment &&
             <div className="scrollable-table-container">
               <table className="table table-striped table-hover">
                 <thead>
@@ -257,9 +273,14 @@ export default class ListFragmentComponent extends Component {
               </table>
             </div>
             }
-            {!this.props.showItemsAsTable && 
+            {this.props.viewType === ListFragmentComponent.VIEW_TYPE_CARD && this.props.cardFragment &&
             <div className="d-flex flex-wrap">
                 {elements != null && elements.map(data => this.props.cardFragment(data))}   
+            </div>
+            }
+            {this.props.viewType === ListFragmentComponent.VIEW_TYPE_FULL && this.props.fullFragment &&
+            <div className="d-flex flex-wrap">
+                {elements != null && elements.map(data => this.props.fullFragment(data))}   
             </div>
             }
 
@@ -280,7 +301,7 @@ export default class ListFragmentComponent extends Component {
           }
           
           <div className="modal" id="modalFilterDialog" role="dialog" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">Configuración del filtro</h5>
