@@ -37,5 +37,15 @@ MIT © [Noel Hernandez](https://github.com/Noel Hernandez)
 lanzar en cada actualizacion, para que publique.
 
 ```bash
-npm install
+yarn install
+yarn link
+yarn start
 ```
+
+En la carpeta del proyecto donde se va a usar
+```bash
+yarn install
+yarn link "nclab-react-core" 
+yarn start
+```
+

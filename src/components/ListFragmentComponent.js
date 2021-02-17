@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field, getFormValues, change, stopAsyncValidation } from 'redux-form';
 import { LOADSTATE, SUBMITSTATE } from "../components/AfeFields";
-import * as AfeFields from "../components/AfeFields";
 import Pagination from "../components/Pagination";
 import * as ErrorManagement from "../util/ErrorManagement";
 import classNames from "classnames";
