@@ -48,4 +48,12 @@ yarn install
 yarn link "nclab-react-core" 
 yarn start
 ```
+## Upgrade node version
 
+```bash
+brew update
+brew doctor
+brew upgrade node
+sudo chown -R $USER /usr/local
+brew link --overwrite node
+```
