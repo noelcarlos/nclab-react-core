@@ -18,8 +18,11 @@ export const loadData = async (formInstance, fn, dispatch) => {
 export const submitData = async (formInstance, fn) => {
     try {
         formInstance.setState({ loadState: SUBMITSTATE.SUBMITTING });
-        await fn();
-        formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_OK });
+        
+        const navigateAway = await fn();
+
+        if (navigateAway === false)
+            formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_OK });
             /*.then(res => {
                 formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_OK });
                 console.log("Hemos pillado un nada");

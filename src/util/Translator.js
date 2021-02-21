@@ -30,7 +30,7 @@ export const setI18nConfig = (handleLocalizationChange, translationGetters) => {
     //RNLocalize.findBestAvailableLanguage(Object.keys(translationGetters)) ||
     fallback;
 
-    console.log(fallback);
+  //console.log("calculated locale:", fallback);
 
   // clear translation cache
   _t.cache.clear();
@@ -39,4 +39,6 @@ export const setI18nConfig = (handleLocalizationChange, translationGetters) => {
   // set i18n-js config
   I18n.translations = { [languageTag]: translationGetters[languageTag]() };
   I18n.locale = languageTag;
+
+  //console.log("Idioma establecido:", I18n.locale);
 };

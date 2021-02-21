@@ -13,7 +13,7 @@ export const Input = ({
   return (
     <div className={containerStyle}>
       {label && <label htmlFor={input.name}>{label}</label>}
-      <input {...input} className={classError} placeholder={placeholder} type={type} />
+      <input data-testid={input.name} {...input} className={classError} placeholder={placeholder} type={type} />
         {touched &&
           ((error && <div className="text-danger" role="alert">{error}</div>) ||
             (warning && <div className="text-warning" role="alert">{warning}</div>))}
