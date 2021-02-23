@@ -43,14 +43,16 @@ export class TabItem extends Component {
               {child.props && (child.props.showIfSmall || this.state.width < 992) && <li key={index} className="nav-item">
                 <a className={child.props.active ? "nav-link active" : "nav-link"} 
                   id={child.props.id + '-tab'} data-toggle="tab" 
-                  href={'#' + child.props.id} role="tab" 
+                  href={(child.props.href !== undefined) ? child.props.href: '#' + child.props.id} 
+                  role="tab" 
+                  onClick={(e) => {if (child.props.onClick !== undefined) child.props.onClick(e, child.props.id); }}
                   aria-controls={child.props.id} 
                   aria-selected={child.props.active}>{child.props.title}</a>
               </li>}
             </Fragment>
           ))}
         </ul>
-        <div className="tab-content">
+        <div className="tab-content pt-4">
           {this.props.children.map((child, index) => (
             <Fragment key={index}>
             {child.props && (child.props.showIfSmall || this.state.width < 992) &&

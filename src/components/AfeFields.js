@@ -1,5 +1,7 @@
 import React from "react";
 import RangeSlider from 'react-bootstrap-range-slider';
+import classNames from "classnames";
+import { change } from "redux-form";
 
 export const Input = ({
   input,
@@ -194,10 +196,8 @@ export const MenuWithIcons = ({
   label,
   placeholder,
   containerStyle = "col-sm-1",
-  type,
   options=[],
-  onChange,
-  meta: { touched, error, warning }
+  meta: { touched, error, warning, dispatch, form }
 }) => {
   const classError = (touched && (error || warning)) ? "form-control col-md-12 mb-2 is-invalid" : "form-control col-md-12 mb-2";
 
@@ -208,9 +208,9 @@ export const MenuWithIcons = ({
       <input {...input} className={classError} placeholder={placeholder} type="hidden" 
             onChange={changeEvent => {     
               console.log("input.onChange=", changeEvent.target.value);
-              input.onChange(changeEvent.target.value); 
+              //input.onChange(changeEvent.target.value); 
               //if (onChange!= null) onChange(changeEvent.target.value);
-              changeEvent.preventDefault();
+              //changeEvent.preventDefault();
              }
             } 
       /> 
@@ -226,15 +226,14 @@ export const MenuWithIcons = ({
       </button>
       <div className="dropdown-menu">
         {options.map( (item, index) => 
-          <a key={item.value} className="dropdown-item" href="/" 
-            onClick={ clickEvent => {
+          <a key={item.value} className="dropdown-item"  href="#"
+            onClick={ async (clickEvent) => {
                 const elValor = item.value;
+                await dispatch(change(form, input.name, elValor));
                 if (input.onChange !== null)
-                  input.onChange(elValor); 
-                //if (onChange!= null) onChange(elValor);          
-                clickEvent.preventDefault(); 
+                  input.onChange(elValor);
             }}>
-          <span className="mr-2">{item.label}  </span>
+          <span className="mr-2">{item.label} </span>
           {item.asc ? <i className="fas fa-long-arrow-alt-up"></i> : <i className="fas fa-long-arrow-alt-down"></i>}          
           </a>)
         }
@@ -242,6 +241,38 @@ export const MenuWithIcons = ({
       
     </div>
   );
+};
+
+export const MenuGroupButtons = ({
+  input,
+  label,
+  placeholder,
+  containerStyle = "col-sm-1",
+  options=[],
+  meta: { touched, error, warning, dispatch, form }
+}) => {
+  const classError = (touched && (error || warning)) ? "form-control col-md-12 mb-2 is-invalid" : "form-control col-md-12 mb-2";
+
+  return (
+    <div className={containerStyle}>
+      {label && <label htmlFor={input.name}>{label}</label>}
+      <input {...input} className={classError} placeholder={placeholder} type="hidden" /> 
+
+      <div className="btn-group mb-2" role="group">
+        {options.map(data => 
+          <button key={data.id} type="button" className={classNames(
+            "btn",
+            {
+              "btn-secondary": data.id !== input.value,
+              "btn-primary": data.id === input.value
+            })} 
+            onClick={ async (event) => { await dispatch(change(form, input.name, data.id)); input.onChange(data.id);  } }
+            >{data.label} {data.counter && <span className="badge badge-info"> {data.counter ? data.counter : 0} </span>}</button>
+        )}
+      </div>
+    </div>
+  );
+
 };
 
 export class CheckboxGroup extends React.Component {

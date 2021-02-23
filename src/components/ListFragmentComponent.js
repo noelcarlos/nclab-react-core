@@ -188,7 +188,7 @@ export default class ListFragmentComponent extends Component {
 
   render() {
 
-    const { elements, handleSubmit, error } = this.props;
+    const { elements, handleSubmit, error, showNewButton=true, showFilterButton=true } = this.props;
 
     return (
       <Fragment>
@@ -204,19 +204,23 @@ export default class ListFragmentComponent extends Component {
 
             <div className="row">
               <div className="col-md-12 form-row">
+
+                {showNewButton && 
                 <button className="btn btn-primary mb-2" onClick={(e) => { this.onShowEditDialog(null); e.preventDefault(); }}>
                     <i className="fa fa-pencil"></i> Alta
-                </button>
+                </button>}
 
                 {this.props.quickSearchFragment}
 
+                {this.props.quickSearchFragment && 
                 <button className="btn btn-primary ml-2 mb-2" onClick={handleSubmit(this.onSearch)}>
                     <i className="fa fa-search"></i> Buscar
-                </button>
+                </button>}
 
+                {showFilterButton && 
                 <button className="btn btn-primary ml-2 mb-2" onClick={(e) => { this.onShowFilterDialog(); e.preventDefault(); }}>
                     <i className="fas fa-filter"></i> Filtrar
-                </button>
+                </button>}
                 
                 {this.props.sortFragment}
 

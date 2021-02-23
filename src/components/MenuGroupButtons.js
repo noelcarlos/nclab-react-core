@@ -5,7 +5,7 @@ export default class MenuGroupButtons extends Component {
 
     render() {
   
-      const { options, value, onClick } = this.props;
+      const { options, value, onChange } = this.props;
   
       return (
         <div className="btn-group mb-2" role="group">
@@ -15,7 +15,7 @@ export default class MenuGroupButtons extends Component {
               {
                 "btn-secondary": data.id !== value,
                 "btn-primary": data.id === value
-              })} onChange={ () => onClick(data.id, value) } >{data.label} <span className="badge badge-info"> {data.counter ? data.counter : 0} </span></button>
+              })} onClick={ () => onChange(data.id, value) } >{data.label} {data.counter && <span className="badge badge-info"> {data.counter ? data.counter : 0} </span>}</button>
           )}
         </div>
       );
