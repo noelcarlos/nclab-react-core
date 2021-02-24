@@ -204,16 +204,7 @@ export const MenuWithIcons = ({
   return (
     <div className={containerStyle}>
       {label && <label htmlFor={input.name}>{label}</label>}
-
-      <input {...input} className={classError} placeholder={placeholder} type="hidden" 
-            onChange={changeEvent => {     
-              console.log("input.onChange=", changeEvent.target.value);
-              //input.onChange(changeEvent.target.value); 
-              //if (onChange!= null) onChange(changeEvent.target.value);
-              //changeEvent.preventDefault();
-             }
-            } 
-      /> 
+      <input {...input} className={classError} placeholder={placeholder} type="hidden" /> 
 
       <button type="button" className="btn btn-primary dropdown-toggle ml-2" data-toggle="dropdown" 
         aria-haspopup="true" aria-expanded="false">
@@ -316,17 +307,17 @@ export class CheckboxGroup extends React.Component {
   }
 }
 
-
-
 export const LOADSTATE = {
   LOADING: 'LOADING',
   LOADED_OK: 'LOADED_OK',
-  LOADED_KO: 'LOADED_KO'
+  LOADED_KO: 'LOADED_KO',
+  LOADED_SECURITY_ERROR: 'LOADED_SECURITY_ERROR'
 };
 
 export const SUBMITSTATE = {
   NONE: 'NONE',
   SUBMITTING: 'SUBMITTING',
   SUBMITTED_OK: 'SUBMITTED_OK',
-  SUBMITTED_KO: 'SUBMITTED_KO'
+  SUBMITTED_KO: 'SUBMITTED_KO',
+  SUBMITTED_SECURITY_ERROR: 'SUBMITTED_SECURITY_ERROR'
 };

@@ -267,7 +267,7 @@ export default class ListFragmentComponent extends Component {
               <table className="table table-striped table-hover">
                 <thead>
                   <tr>
-                    {this.props.headers.map(data => <th key={data.label} align={data.align} scope="col">{data.label}</th>)}
+                    {this.props.headers.map(data => <th key={data.label} align={data.align} style={{textAlign:''+data.align}} scope="col">{data.label}</th>)}
                   </tr>
                 </thead>
                 <tbody>

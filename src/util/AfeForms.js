@@ -9,8 +9,13 @@ export const loadData = async (formInstance, fn, dispatch) => {
         formInstance.setState({ loadState: LOADSTATE.LOADED_OK });
     } catch (error) {
         formInstance.setState({ loadState: LOADSTATE.LOADED_KO });
-        if (stopAsyncValidation !== undefined && dispatch !== undefined) {
+        if (dispatch === undefined) {
+            dispatch = formInstance.props.dispatch;
+        }
+        if (dispatch !== undefined) {
             dispatch(stopAsyncValidation(formInstance.form !== undefined ? formInstance.form : formInstance.name, ErrorManagement.getAllErrors(error)));
+        } else {
+            console.error("Ha ocurrido un error de configuración, no se ha informado el dispatch")
         }
     }
 }
@@ -23,21 +28,7 @@ export const submitData = async (formInstance, fn) => {
 
         if (navigateAway === false)
             formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_OK });
-            /*.then(res => {
-                formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_OK });
-                console.log("Hemos pillado un nada");
-            })
-            .catch(error => {
-                console.log("Hemos pillado un asdsadda");
-                formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_KO });
-                if (stopAsyncValidation !== undefined && dispatch !== undefined) {
-                    dispatch(stopAsyncValidation(formInstance.form, ErrorManagement.getAllErrors(error)));
-                } else {
-                    console.log("Hemos pillado un error");
-                    throw new SubmissionError(ErrorManagement.getAllErrors(error));
-                }
-            });*/
-        
+            
     } catch (error) {
         formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_KO });
         throw new SubmissionError(ErrorManagement.getAllErrors(error));
