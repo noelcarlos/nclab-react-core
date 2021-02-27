@@ -188,7 +188,7 @@ export default class ListFragmentComponent extends Component {
 
   render() {
 
-    const { elements, handleSubmit, error, showNewButton=true, showFilterButton=true } = this.props;
+    const { elements, handleSubmit, error, showNewButton=true, showFilterButton=true, tableClassName } = this.props;
 
     return (
       <Fragment>
@@ -263,7 +263,7 @@ export default class ListFragmentComponent extends Component {
             </div>
 
            {this.props.viewType === ListFragmentComponent.VIEW_TYPE_LIST && this.props.rowFragment &&
-            <div className="scrollable-table-container">
+            <div className={tableClassName ? tableClassName : "scrollable-table-container"}>
               <table className="table table-striped table-hover">
                 <thead>
                   <tr>
