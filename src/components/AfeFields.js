@@ -126,21 +126,22 @@ export const Checkbox = ({
   meta: { touched, error, warning }
 }) => {
   const classError = (touched && (error || warning)) ? "form-check-input is-invalid" : "form-check-input";
-  
+
   return (
     <div className={containerStyle}>
       {label && <div className="form-control col-md-12 border border-0">
         {label && <label htmlFor={input.name}>{label}</label>}
       </div>}
       <div className="d-flex flex-column ml-3">
-        <div className="p-1">
-          <input {...input} className={classError} type="checkbox" />
+        <div className="d-flex align-items-center">
+          <input {...input} className={classError} type="checkbox" 
+            checked={input.value} />
           {placeholder && <label htmlFor={input.name}>{placeholder}</label>}
           {children}
         </div>
       </div>
         {touched &&
-          ((error && <div className="p-1"><div className="text-danger" role="alert">{error}</div></div>) ||
+          ((error && <div className="text-danger" role="alert">{error}</div>) ||
             (warning && <div className="text-warning" role="alert">{warning}</div>))}
     </div>
   );
