@@ -9,13 +9,14 @@ export const Input = ({
   containerStyle = "col-sm",
   placeholder,
   type,
+  disabled,
   meta: { touched, error, warning }
 }) => {
   const classError = (touched && (error || warning)) ? "form-control col-md-12 mb-2 is-invalid" : "form-control col-md-12 mb-2";
   return (
     <div className={containerStyle}>
       {label && <label htmlFor={input.name}>{label}</label>}
-      <input data-testid={input.name} {...input} className={classError} placeholder={placeholder} type={type} />
+      <input data-testid={input.name} {...input} className={classError} placeholder={placeholder} type={type} disabled={disabled}/>
         {touched &&
           ((error && <div className="text-danger" role="alert">{error}</div>) ||
             (warning && <div className="text-warning" role="alert">{warning}</div>))}
@@ -23,6 +24,26 @@ export const Input = ({
   );
 };
 
+export const InputArea = ({
+  input,
+  label,
+  containerStyle = "col-sm",
+  placeholder,
+  rows,
+  meta: { touched, error, warning }
+}) => {
+  const classError = (touched && (error || warning)) ? "form-control col-md-12 mb-2 is-invalid" : "form-control col-md-12 mb-2";
+  return (
+    <div className={containerStyle}>
+      {label && <label htmlFor={input.name}>{label}</label>}
+      <textarea data-testid={input.name} {...input} className={classError} placeholder={placeholder} rows={rows}/>
+        {touched &&
+          ((error && <div className="text-danger" role="alert">{error}</div>) ||
+            (warning && <div className="text-warning" role="alert">{warning}</div>))}
+    </div>
+  );
+};
+ 
 export const Select = ({
   input,
   containerStyle = "col-sm",
