@@ -9,11 +9,17 @@ export const loadData = async (formInstance, fn, dispatch) => {
         formInstance.setState({ loadState: LOADSTATE.LOADED_OK });
     } catch (error) {
         formInstance.setState({ loadState: LOADSTATE.LOADED_KO });
+        const allErrors = ErrorManagement.getAllErrors(error);
+        
+        if (formInstance.form === undefined && formInstance.name === undefined) {
+            console.warn("form name does not exist on this instance", formInstance);
+        }
+        
         if (dispatch === undefined) {
             dispatch = formInstance.props.dispatch;
         }
         if (dispatch !== undefined) {
-            dispatch(stopAsyncValidation(formInstance.form !== undefined ? formInstance.form : formInstance.name, ErrorManagement.getAllErrors(error)));
+            dispatch(stopAsyncValidation(formInstance.form !== undefined ? formInstance.form : formInstance.name, allErrors));
         } else {
             console.error("Ha ocurrido un error de configuración, no se ha informado el dispatch")
         }

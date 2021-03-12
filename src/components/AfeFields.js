@@ -1,7 +1,8 @@
 import React from "react";
 import RangeSlider from 'react-bootstrap-range-slider';
+import { change, touch } from "redux-form";
+import { Typeahead, AsyncTypeahead } from 'react-bootstrap-typeahead';
 import classNames from "classnames";
-import { change } from "redux-form";
 
 export const Input = ({
   input,
@@ -61,7 +62,7 @@ export const Select = ({
         className={classError} 
         {...restProps}
         value={value}
-        onChange={value => onChange(value)}
+        onChange={ v => onChange(v)}
         {...restInput}
       >
         {children}
@@ -328,6 +329,139 @@ export class CheckboxGroup extends React.Component {
       )
   }
 }
+
+
+
+export const Autocomplete = ({
+  input,
+  containerStyle = "col-sm",
+  meta: { touched, error, warning, dispatch, form },
+  input: { value, ...restInput },
+  label,
+  labelKey,
+  options,
+  selected,
+  clearButton,
+  placeholder,
+  onChange,
+  ...restProps
+}) => {
+  const classError = (touched && (error || warning)) ? "is-invalid" : "";
+
+  const locateSelection = options.filter(x => x.value === input.value);
+
+  /*console.log("input.value 1", input.value);
+  console.log("locateSelection 1", locateSelection);
+  console.log("locateSelection 2", [{label: "ESTONIA", value: 334}]);
+  console.log("labelKey 2", locateSelection.length > 0 ? labelKey(locateSelection[0]) : '');*/
+  //console.log("is equals", locateSelection == [{label: "ESTONIA", value: 334}]);
+
+  return (
+    <div className={containerStyle}>
+      {label && <label htmlFor={input.name}>{label}</label>}
+
+      <input name={input.name} type="hidden" />
+      <Typeahead
+        id={input.name}
+        labelKey={labelKey}
+        clearButton={clearButton}
+        className={classError}
+        //filterBy={filterBy} 
+        //onInputChange={(text, e) => { console.log(text, e); }}
+        //multiple
+        //onChange={v => onChange(v)}
+        options={options}
+        placeholder={placeholder}
+        selected= {locateSelection}
+        //defaultInputValue = { locateSelection.length > 0 ? labelKey(locateSelection[0]) : '' }
+        //inputProps = { { value: locateSelection.length > 0 ? labelKey(locateSelection[0]) : '' } }
+        //defaultSelected={ (options && options.length) ? [ {label: "ESTONIA", value: 334} /*options[0]*/ ] : [ ] }
+        onChange={async (item) => {
+          const elValor = (item.length === 0) ? null: item[0].value;
+          await dispatch(change(form, input.name, elValor));
+          if (onChange !== null && onChange !== undefined)
+            onChange((item.length === 0) ? null: item[0]);
+        }}
+
+        onBlur={async () => {
+          await dispatch(touch(form, input.name));
+        }}
+
+      />
+
+      {touched &&
+        ((error && <div className="text-danger" role="alert">{error}</div>) ||
+          (warning && <div className="text-warning" role="alert">{warning}</div>))}
+    </div>
+
+  );
+};
+
+export const AsyncAutocomplete = ({
+  input,
+  containerStyle = "col-sm",
+  meta: { touched, error, warning, dispatch, form },
+  label,
+  labelKey,
+  options,
+  selected,
+  clearButton,
+  placeholder,
+  onSearch,
+  isLoading,
+  onChange,
+  ...restProps
+}) => {
+  const classError = (touched && (error || warning)) ? "is-invalid" : "";
+
+  const locateSelection = options.filter(x => x.value === input.value);
+  const defaultInputValue = (locateSelection.length === 0) ? undefined : labelKey(locateSelection[0]);
+  
+  //console.log("options", options[2]);
+  console.log("input.value", input.value);
+  console.log("locateSelection", locateSelection);
+  console.log("defaultInputValue", defaultInputValue);
+
+  return (
+    <div className={containerStyle}>
+      {label && <label htmlFor={input.name}>{label}</label>}
+
+      <AsyncTypeahead
+        id={input.name}
+        labelKey={labelKey}
+        clearButton={clearButton}
+        onSearch={onSearch}
+        className={classError}
+        isLoading={isLoading}
+        //filterBy={filterBy} 
+        //onInputChange={(text, e) => { console.log(text, e); }}
+        //multiple
+        //onChange={v => onChange(v)}
+        options={options}
+        //placeholder={placeholder}
+        //defaultInputValue = { defaultInputValue }
+        selected= {(locateSelection.length === 0) ? [] : locateSelection}
+        //useCache={false}
+        onChange={async (item) => {
+          const elValor = (item.length === 0) ? null: item[0].value;
+          await dispatch(change(form, input.name, elValor));
+          if (onChange !== null && onChange !== undefined)
+            onChange((item.length === 0) ? null: item[0]);
+        }}
+
+        onBlur={async () => {
+          await dispatch(touch(form, input.name));
+        }}
+
+      />
+
+      {touched &&
+        ((error && <div className="text-danger" role="alert">{error}</div>) ||
+          (warning && <div className="text-warning" role="alert">{warning}</div>))}
+    </div>
+
+  );
+};
 
 export const LOADSTATE = {
   LOADING: 'LOADING',
