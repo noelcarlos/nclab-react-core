@@ -25,19 +25,14 @@
   },
   "peerDependencies": {
     "i18n-js": "^3.8.0",
-    "paginator": "^1.0.0",
     "react": "^16.14.0",
-    "react-bootstrap": "^1.4.3",
-    "react-bootstrap-range-slider": "^2.0.2",
-    "react-bootstrap-typeahead": "^5.1.4",
     "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
     "react-redux": "^7.2.2",
     "react-redux-form": "^1.16.14",
-    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
-    "redux-thunk": "^2.3.0",
-    "sweetalert2": "^8.19.0"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
@@ -64,6 +59,11 @@
     "dist"
   ],
   "dependencies": {
+    "react-bootstrap": "^1.4.3",
+    "react-bootstrap-range-slider": "^2.0.2",
+    "react-bootstrap-typeahead": "^5.1.4",
+    "paginator": "^1.0.0",
+    "sweetalert2": "^8.19.0", 
     "classnames": "^2.2.6"
   }
 }
