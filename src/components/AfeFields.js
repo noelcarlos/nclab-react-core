@@ -31,13 +31,14 @@ export const InputArea = ({
   containerStyle = "col-sm",
   placeholder,
   rows,
+  disabled,
   meta: { touched, error, warning }
 }) => {
   const classError = (touched && (error || warning)) ? "form-control col-md-12 mb-2 is-invalid" : "form-control col-md-12 mb-2";
   return (
     <div className={containerStyle}>
       {label && <label htmlFor={input.name}>{label}</label>}
-      <textarea data-testid={input.name} {...input} className={classError} placeholder={placeholder} rows={rows}/>
+      <textarea data-testid={input.name} {...input} className={classError} placeholder={placeholder} rows={rows} disabled={disabled}/>
         {touched &&
           ((error && <div className="text-danger" role="alert">{error}</div>) ||
             (warning && <div className="text-warning" role="alert">{warning}</div>))}
@@ -52,6 +53,7 @@ export const Select = ({
   input: { onChange, value, ...restInput },
   label,
   children,
+  disabled,
   ...restProps
 }) => {
   const classError = (touched && (error || warning)) ? "form-control col-md-12 mb-2 is-invalid" : "form-control col-md-12 mb-2";
@@ -63,6 +65,7 @@ export const Select = ({
         {...restProps}
         value={value}
         onChange={ v => onChange(v)}
+        disabled={disabled}
         {...restInput}
       >
         {children}
@@ -124,6 +127,7 @@ export const Checkbox = ({
   placeholder,
   containerStyle = "col-sm",
   children,
+  disabled,
   meta: { touched, error, warning }
 }) => {
   const classError = (touched && (error || warning)) ? "form-check-input is-invalid" : "form-check-input";
@@ -136,7 +140,7 @@ export const Checkbox = ({
       <div className="d-flex flex-column ml-3">
         <div className="d-flex align-items-center">
           <input {...input} className={classError} type="checkbox" 
-            checked={input.value} />
+            checked={input.value} disabled={disabled} />
           {placeholder && <label htmlFor={input.name}>{placeholder}</label>}
           {children}
         </div>
@@ -153,6 +157,7 @@ export const Radio = ({
   label, value,
   containerStyle = "col-sm",
   children,
+  disabled,
   meta: { touched, error, warning }
 }) => {
   const classError = (touched && (error || warning)) ? "form-check-input is-invalid" : "form-check-input";
@@ -167,7 +172,7 @@ export const Radio = ({
       <div className="d-flex flex-column ml-3">
         <div className="p-1">
         <label>
-          <input {...input} className={classError} type="radio" />
+          <input {...input} className={classError} type="radio" disabled={disabled} />
           
           {/*checked={input && value === input.value} */}
           {label ? label : null}{children}
