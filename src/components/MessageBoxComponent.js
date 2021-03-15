@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { reduxForm, Field, getFormValues, SubmissionError, change, stopSubmit, stopAsyncValidation} from 'redux-form';
+import { stopAsyncValidation} from 'redux-form';
 import store from "../api/store"; 
 import { LOADSTATE, SUBMITSTATE } from "./AfeFields";
-import * as AfeFields from "./AfeFields";
-import Pagination from "./Pagination";
 import * as ErrorManagement from "../util/ErrorManagement";
 
 class MessageBoxComponent extends Component {
