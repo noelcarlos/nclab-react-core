@@ -15,7 +15,8 @@ export default class MenuGroupButtons extends Component {
               {
                 "btn-secondary": data.id !== value,
                 "btn-primary": data.id === value
-              })} onClick={ () => onChange(data.id, value) } >{data.label} {data.counter && <span className="badge badge-info"> {data.counter ? data.counter : 0} </span>}</button>
+              })} onClick={ () => onChange(data.id, value) } 
+              >{data.label} {data.counter !== undefined && <span className="badge badge-info"> {data.counter !== undefined ? data.counter : 0} </span>}</button>
           )}
         </div>
       );

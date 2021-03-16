@@ -31,7 +31,7 @@ class FilterTagList extends Component {
       <div className="row mb-2">
         <div className="col-md-12">
           {filters && elements.map( property => 
-            <div key={property} className="badge badge-info p-2 mb-2 mr-2">
+            (filters[property].visible === undefined || filters[property].visible === true) && <div key={property} className="badge badge-info p-2 mb-2 mr-2">
               <span className="mr-2">{filters[property].label} </span>
               <a href="/" className="btn-danger px-1" role="button" onClick={ (e) => {onRemove(property); e.preventDefault();} }>
                 <i className="fa fa-close" ></i>
@@ -204,7 +204,7 @@ export default class ListFragmentComponent extends Component {
             <div className="row">
               <div className="col-md-12 form-row">
 
-                {showNewButton && 
+                {this.props.onCreate && 
                 <button className="btn btn-primary mb-2" onClick={(e) => { this.onShowEditDialog(null); e.preventDefault(); }}>
                     <i className="fa fa-pencil"></i> Alta
                 </button>}

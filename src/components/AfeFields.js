@@ -286,7 +286,7 @@ export const MenuGroupButtons = ({
               "btn-primary": data.id === input.value
             })} 
             onClick={ async (event) => { await dispatch(change(form, input.name, data.id)); input.onChange(data.id);  } }
-            >{data.label} {data.counter && <span className="badge badge-info"> {data.counter ? data.counter : 0} </span>}</button>
+            >{data.label} {data.counter !== undefined && <span className="badge badge-info"> {data.counter !== undefined ? data.counter : 0} </span>}</button>
         )}
       </div>
     </div>
