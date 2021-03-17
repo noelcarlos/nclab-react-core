@@ -12,7 +12,7 @@ export const loadData = async (formInstance, fn, dispatch) => {
         const allErrors = ErrorManagement.getAllErrors(error);
         
         if (formInstance.form === undefined && formInstance.name === undefined) {
-            console.warn("form name does not exist on this instance", formInstance);
+            console.warn("'form' field or 'name' field does not exist on this instance, error will not be dispatched properly", formInstance);
         }
         
         if (dispatch === undefined) {

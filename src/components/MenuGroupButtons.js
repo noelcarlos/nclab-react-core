@@ -8,7 +8,7 @@ export default class MenuGroupButtons extends Component {
       const { options, value, onChange } = this.props;
   
       return (
-        <div className="btn-group mb-2" role="group">
+        <div className={"btn-group mb-2 " + (this.props.className ? this.props.className : "")}  role="group">
           {options.map(data => 
             <button key={data.id} type="button" className={classNames(
               "btn",

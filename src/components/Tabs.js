@@ -37,7 +37,7 @@ export class TabItem extends Component {
   
     render() {
       return (<Fragment>
-        <ul id={this.props.id && "tab-menu"} className="nav nav-tabs" role="tablist">  
+        <ul id={this.props.id && "tab-menu"} className={"nav nav-tabs " + (this.props.className ? this.props.className : "")} role="tablist">  
           {this.props.children.map((child, index) => (
             <Fragment key={index}>
               {child.props && (child.props.showIfSmall || this.state.width < 992) && <li key={index} className="nav-item">

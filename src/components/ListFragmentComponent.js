@@ -79,17 +79,7 @@ export default class ListFragmentComponent extends Component {
   }
 
   onLoad = async(currentPage) => {
-    try {
-      this.setState({ loadState: LOADSTATE.LOADING, currentPage: currentPage });
-
-      this.props.onLoad(currentPage, this.state.filters, this.state.sort);
-
-      this.setState({ loadState: LOADSTATE.LOADED_OK });
-    } catch (error) {
-      this.setState({ loadState: LOADSTATE.LOADED_KO });
-      this.props.dispatch(stopAsyncValidation(this.props.form, ErrorManagement.getAllErrors(error)));
-      //this.props.stopAsyncValidation(this.props.form, { _error: ErrorManagement.getMessage(error) });
-    }
+    this.props.onLoad(currentPage, this.state.filters, this.state.sort);
   }
 
   static createBooleanFilter(filter, property, label, value) {
@@ -196,7 +186,7 @@ export default class ListFragmentComponent extends Component {
           {!this.state.showFilterDialog && error && <div className="alert alert-danger" role="alert">{error}</div>}
 
           {elements == null && !error &&
-          <div className="h114">No ha contratado ningun producto</div>}
+          <div className="alert alert-warn">No ha contratado ningun producto</div>}
 
           {elements != null &&
           <Fragment> 
