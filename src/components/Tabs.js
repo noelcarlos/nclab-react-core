@@ -57,7 +57,7 @@ export class TabList extends Component {
             {child !== undefined && child.props && (child.props.showIfSmall || this.state.width < 992) &&
             <div className={(child.props.active ? "tab-pane fade show active" : "tab-pane fade")}
                id={child.props.id} role="tabpanel" aria-labelledby={child.props.title}>
-              {child}
+              {child} TTTTTTTTTTTTTTTTT
             </div>}
             </Fragment>
           ))}
