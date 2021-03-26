@@ -39,7 +39,7 @@ export class TabList extends Component {
 
       return (<Fragment>
         <ul id={this.props.id && "tab-menu"} className={"nav nav-tabs " + (this.props.className ? this.props.className : "")} role="tablist">  
-          {this.props.children && this.props.children.map && this.props.children.map((child, index) => (
+          {this.props.children && this.props.children.map((child, index) => (
             <Fragment key={index}>
               {child !== undefined && child.props && (child.props.showIfSmall || this.state.width < 992) && <li key={index} className="nav-item">
                 <a className={child.props.active ? "nav-link active" : "nav-link"} 
@@ -54,12 +54,12 @@ export class TabList extends Component {
           ))}
         </ul>
         <div className="tab-content pt-4">
-          {this.props.children && this.props.children.map && this.props.children.map((child, index) => (
+          {this.props.children && this.props.children.map((child, index) => (
             <Fragment key={index}>
             {child !== undefined && child.props && (child.props.showIfSmall || this.state.width < 992) &&
             <div className={(child.props.active ? "tab-pane fade show active" : "tab-pane fade")}
                id={child.props.id} role="tabpanel" aria-labelledby={child.props.title}>
-              {child} TTTTTTTTTTTTTTTTT
+              {child}
             </div>}
             </Fragment>
           ))}
