@@ -1,22 +1,21 @@
 import React, { Component, Fragment } from "react";
 
 export class TabItem extends Component {
+  static defaultProps = {
+    active: false,
+    showIfSmall: true
+  };
 
-    static defaultProps = {
-      active: false,
-      showIfSmall: true
-    };
-  
-    render() {
-      const { id, title, active, showIfSmall } = this.props;
-      return (<Fragment>
-        {this.props.children}
-      </Fragment>);
-    }
-  
+  render() {
+    const { id, title, active, showIfSmall } = this.props;
+    return (<Fragment>
+      {this.props.children}
+    </Fragment>);
   }
+
+}
   
-  export class TabList extends Component {
+export class TabList extends Component {
     state = {
       width: 1200,
       heigth: 900
@@ -38,9 +37,9 @@ export class TabItem extends Component {
     render() {
       return (<Fragment>
         <ul id={this.props.id && "tab-menu"} className={"nav nav-tabs " + (this.props.className ? this.props.className : "")} role="tablist">  
-          {this.props.children.map((child, index) => (
+          {this.props.children && this.props.children.map((child, index) => (
             <Fragment key={index}>
-              {child.props && (child.props.showIfSmall || this.state.width < 992) && <li key={index} className="nav-item">
+              {child !== undefined && child.props && (child.props.showIfSmall || this.state.width < 992) && <li key={index} className="nav-item">
                 <a className={child.props.active ? "nav-link active" : "nav-link"} 
                   id={child.props.id + '-tab'} data-toggle="tab" 
                   href={(child.props.href !== undefined) ? child.props.href: '#' + child.props.id} 
@@ -53,9 +52,9 @@ export class TabItem extends Component {
           ))}
         </ul>
         <div className="tab-content pt-4">
-          {this.props.children.map((child, index) => (
+          {this.props.children && this.props.children.map((child, index) => (
             <Fragment key={index}>
-            {child.props && (child.props.showIfSmall || this.state.width < 992) &&
+            {child !== undefined && child.props && (child.props.showIfSmall || this.state.width < 992) &&
             <div className={(child.props.active ? "tab-pane fade show active" : "tab-pane fade")}
                id={child.props.id} role="tabpanel" aria-labelledby={child.props.title}>
               {child}
