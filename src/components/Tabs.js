@@ -35,8 +35,6 @@ export class TabList extends Component {
     }
   
     render() {
-      console.log("rendering tabs");
-
       return (<Fragment>
         <ul id={this.props.id && "tab-menu"} className={"nav nav-tabs " + (this.props.className ? this.props.className : "")} role="tablist">  
           {this.props.children && this.props.children.map((child, index) => (
