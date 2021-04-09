@@ -22,4 +22,4 @@ export default class MenuGroupButtons extends Component {
       );
     }
   
-  };
+  }
