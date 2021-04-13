@@ -44,9 +44,9 @@ export const getAllErrors = (error) => {
 
     if (error.message) {
         if (error.response === undefined)
-            return { _error: "Communication can not be stablished!, " + error.message };
+            return { _error: "Operation could not be performed!, " + error.message };
         if (error.response && error.response.status === 500)
-            return { _error: "Service not available!, " + error.message };
+            return { _error: "Server returns error!, " + error.message };
         else
             return { _error: "Something went wrong!, " + error.message };
     } else

@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 
 export * as AfeFields from './components/AfeFields';
 export { LOADSTATE, SUBMITSTATE } from './components/AfeFields';
-export {default as ListFragmentComponent} from './components/ListFragmentComponent';
+export {default as ListFragmentComponent, FilterTagList, ListFragmentViewType, ListFragmentFilterBuilder } from './components/ListFragmentComponent';
 export {default as EditPopupFragmentComponent} from './components/EditPopupFragmentComponent';
 export {default as Pagination} from './components/Pagination';
 
