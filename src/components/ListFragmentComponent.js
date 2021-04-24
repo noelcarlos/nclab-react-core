@@ -130,6 +130,15 @@ export class ListFragmentFilterBuilder {
     return this;
   }
 
+  range = (property, label, rangeStart, rangeEnd) =>  {
+    if (((rangeStart !== null && rangeStart !== undefined) || (rangeEnd !== null && rangeEnd !== undefined)) && property !== null && property !== undefined) {
+      this.filters[property] = { type: "TERM", field: property, 
+        label: label + " : " + rangeStart + "-" + rangeEnd, rangeStart:rangeStart, rangeEnd:rangeEnd };
+    }
+    return this;
+  }
+  ListFragmentFilterBuilder
+
   build = () =>  {
     return this.filters;
   }
