@@ -19,7 +19,7 @@ export const loadData = async (formInstance, fn, dispatch) => {
             dispatch = formInstance.props.dispatch;
         }
         if (dispatch !== undefined) {
-            dispatch(stopAsyncValidation(formInstance.form !== undefined ? formInstance.form : formInstance.name, allErrors));
+            await dispatch(stopAsyncValidation(formInstance.form !== undefined ? formInstance.form : formInstance.name, allErrors));
         } else {
             console.error("Ha ocurrido un error de configuración, no se ha informado el dispatch")
         }
