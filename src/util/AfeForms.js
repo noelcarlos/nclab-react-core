@@ -5,7 +5,6 @@ import { LOADSTATE, SUBMITSTATE } from "../components/AfeFields";
 export const loadData = async (formInstance, fn, dispatch) => {
     try {
         formInstance.setState({ loadState: LOADSTATE.LOADING });
-        console.log("Loading data...", formInstance);
         await fn();
         formInstance.setState({ loadState: LOADSTATE.LOADED_OK });
     } catch (error) {
