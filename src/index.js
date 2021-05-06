@@ -17,7 +17,7 @@ export {default as MenuGroupButtons} from './components/MenuGroupButtons';
 export {default as MenuStageButtons} from './components/MenuStageButtons';
 export { TabList, TabItem } from './components/Tabs';
 export { StaticField } from './components/StaticField';
-export { AfeFormMessage } from './components/AfeFormMessage';
+export { AfeFormMessage, AfeLoading } from './components/AfeFormMessage';
 export {default as AfePopupComponent} from './components/AfePopupComponent';
 
 export const ExampleComponent = ({ text }) => {

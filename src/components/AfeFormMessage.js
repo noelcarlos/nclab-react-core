@@ -5,20 +5,29 @@ import { LOADSTATE, SUBMITSTATE } from "./AfeFields";
 export class AfeFormMessage extends Component {
 
     render() {
-      const { error, loadState, submitState } = this.props;
+      const { error } = this.props;
 
       return (<Fragment>
         {error && <div className="alert alert-danger" data-testid="formMessageAlert" role="formMessageAlert">{error}</div>}
-        {(loadState === LOADSTATE.LOADING) && 
-          <div className="alert alert-primary" data-testid="formMessageLoading" role="formMessageLoading">
-             <span className="spinner-border spinner-border-sm mr-2"></span>
-             Loading...
-          </div>}
-        {(submitState === SUBMITSTATE.SUBMITTING) && <div className="alert alert-primary" data-testid="formMessageSubmiting" role="formMessageSubmiting">
-          <span className="spinner-border spinner-border-sm mr-2"></span>
-          Submitting...
-        </div>}
       </Fragment>);
     }
   
+}
+
+export class AfeLoading extends Component {
+  render() {
+    const { loadState, submitState } = this.props;
+
+    return (<Fragment>
+      {(loadState === LOADSTATE.LOADING) && 
+        <div data-testid="formMessageLoading" role="formMessageLoading">
+           <span className="spinner-border spinner-border-xl mr-2 text-primary"></span>
+        </div>}
+      {(submitState === SUBMITSTATE.SUBMITTING) && 
+        <div data-testid="formMessageSubmiting" role="formMessageSubmiting">
+          <span className="spinner-border spinner-border-xl mr-2 text-primary"></span>
+        </div>}
+    </Fragment>);
+  }
+
 }
