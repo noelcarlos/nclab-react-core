@@ -197,8 +197,7 @@ export const File = ({
   placeholder,
   meta: { touched, error, warning }
 }) => {
-  
-  const classError = (touched && (error || warning)) ? "form-control col-md-12 mb-2 is-invalid" : "form-control col-md-12 mb-2";
+  const classError = (touched && (error || warning)) ? "col-md-12 px-0 mb-2 is-invalid" : "col-md-12 px-0 mb-2";
   return (
     <div className={containerStyle}>
       {label && <label htmlFor={input.name}>{label}</label>}
@@ -208,6 +207,54 @@ export const File = ({
         }}
         onBlur={adaptFileEventToValue(onBlur)}
         {...input} 
+        value={input.value === '' || input.value == null ? undefined : undefined}
+        className={classError} 
+        placeholder={placeholder} 
+        type="file" />
+        {touched &&
+          ((error && <div className="text-danger" role="alert">{error}</div>) ||
+            (warning && <div className="text-warning" role="alert">{warning}</div>))}
+    </div>
+  );
+};
+
+const handleOnImageChange = (e, onImageChange) => {
+  console.log("cambiando impage");
+  e.preventDefault();
+
+  let reader = new FileReader();
+  let file = e.target.files[0];
+
+  reader.onloadend = () => {
+    onImageChange(file, reader.result);
+  }
+
+  reader.readAsDataURL(file)
+}
+
+export const Image = ({
+  input,
+  label,
+  containerStyle = "col-sm",
+  onChange,
+  onBlur,
+  onImageChange,
+  placeholder,
+  meta: { touched, error, warning }
+}) => {
+  const classError = (touched && (error || warning)) ? "col-md-12 px-0 mb-2 is-invalid" : "col-md-12 px-0 mb-2";
+  return (
+    <div className={containerStyle}>
+      {label && <label htmlFor={input.name}>{label}</label>}
+      <input 
+        {...input} 
+        onChange={(e) => {
+          //onImageChange(e.target.files[0]);
+          input.onChange(e.target.files[0])
+          if (onImageChange)
+            handleOnImageChange(e, onImageChange);
+        }}
+        //onBlur={adaptFileEventToValue(onBlur)}
         value={input.value === '' || input.value == null ? undefined : undefined}
         className={classError} 
         placeholder={placeholder} 
