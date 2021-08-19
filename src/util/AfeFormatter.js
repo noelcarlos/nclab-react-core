@@ -51,7 +51,7 @@ export const dateTimeShortToStr = (data) => {
     if (data === null || data === undefined)
         return "";
     return new Date(data).toLocaleDateString('es-ES', {year: "numeric", month: "2-digit", day: "2-digit",
-        hour: "2-digit", minute: "2-digit"
+        hour: "2-digit", minute: "2-digit", timeZone: 'UTC'
     });
 }
 
@@ -59,7 +59,7 @@ export const timeShortToStr = (data) => {
     if (data === null || data === undefined)
         return "";
     return new Date(data).toLocaleTimeString('es-ES', {
-        hour: "2-digit", minute: "2-digit"
+        hour: "2-digit", minute: "2-digit", timeZone: 'UTC'
     });
 }
 
