@@ -41,6 +41,10 @@ export const submitData = async (formInstance, fn) => {
     }
 }
 
+export const isSubmitting = (formInstance) => {
+    return formInstance.state.loadState === SUBMITSTATE.SUBMITTING;
+}
+
 export const showDialog = (formName) => {
     window.$('#' + formName + 'Dialog').modal('show');
 }
