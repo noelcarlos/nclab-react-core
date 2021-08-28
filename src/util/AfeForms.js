@@ -37,7 +37,8 @@ export const submitData = async (formInstance, fn) => {
             
     } catch (error) {
         formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_KO });
-        throw new SubmissionError(ErrorManagement.getAllErrors(error));
+        const errorInfo = ErrorManagement.getAllErrors(error);
+        throw new SubmissionError(errorInfo);
     }
 }
 

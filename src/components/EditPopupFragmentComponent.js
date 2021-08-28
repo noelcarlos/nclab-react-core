@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { stopAsyncValidation } from 'redux-form';
+import { stopAsyncValidation, SubmissionError } from 'redux-form';
 import { LOADSTATE, SUBMITSTATE } from "./AfeFields";
 import * as ErrorManagement from "../util/ErrorManagement";
 
@@ -31,14 +31,14 @@ class EditPopupFragmentComponent extends Component {
   onSubmit = async (formValues) => {
     if (this.props.onSubmit !== undefined) {
       try {
-        this.setState({ loadState: LOADSTATE.LOADING });
+        this.setState({ loadState: SUBMITSTATE.SUBMITTING });
         await this.props.onSubmit(formValues);
-        this.setState({ loadState: LOADSTATE.LOADED_OK });
+        this.setState({ loadState: SUBMITSTATE.SUBMITTED_OK });
         this.onCloseEditDialog();
       } catch (error) {
-        this.setState({ loadState: LOADSTATE.LOADED_KO });
-        this.props.dispatch(stopAsyncValidation(this.props.form, ErrorManagement.getAllErrors(error)));
-        //this.props.stopAsyncValidation(this.props.form, ErrorManagement.getAllErrors(error));
+        this.setState({ loadState: SUBMITSTATE.SUBMITTED_KO });
+        const errorInfo = ErrorManagement.getAllErrors(error);
+        throw new SubmissionError(errorInfo);
       }
     }
   }

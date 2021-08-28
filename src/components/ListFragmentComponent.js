@@ -275,7 +275,7 @@ export default class ListFragmentComponent extends Component {
             </div>
             }
             {this.props.viewType === ListFragmentComponent.VIEW_TYPE_CARD && this.props.cardFragment &&
-            <div className="d-flex flex-wrap">
+            <div className={this.props.cardContainerStyle ? this.props.cardContainerStyle : "d-flex flex-wrap"} >
                 {elements != null && elements.map(data => this.props.cardFragment(data))}   
             </div>
             }
