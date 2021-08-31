@@ -104,4 +104,15 @@ export default class MessageBox {
           });
     }
 
+    static showConfirmation = (title, message) => {
+        Swal.fire({
+            title: title,
+            text: message,
+            animation: false,
+            //type: 'success',
+            confirmButtonColor: '#2bc550',
+            cancelButtonColor: '#6c757d'
+        });
+    }
+
 } 

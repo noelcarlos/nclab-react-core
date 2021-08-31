@@ -73,7 +73,7 @@ export class ListFragmentViewType extends Component {
             "btn-secondary": viewType !== ListFragmentComponent.VIEW_TYPE_LIST
             }, "ml-2", "mb-2"])} 
             onClick={() => this.setViewType(ListFragmentComponent.VIEW_TYPE_LIST)}>
-              <i className="fa fa-list"></i>
+              <i className="fas fa-list"></i>
           </button>
         }
         {enableCardButton && 
