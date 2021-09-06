@@ -28,22 +28,22 @@ export const loadData = async (formInstance, fn, dispatch) => {
 
 export const submitData = async (formInstance, fn) => {
     try {
-        formInstance.setState({ loadState: SUBMITSTATE.SUBMITTING });
+        formInstance.setState({ submitState: SUBMITSTATE.SUBMITTING });
         
         const navigateAway = await fn();
 
-        if (navigateAway === false)
-            formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_OK });
+        if (navigateAway == undefined || navigateAway === false)
+            formInstance.setState({ submitState: SUBMITSTATE.SUBMITTED_OK });
             
     } catch (error) {
-        formInstance.setState({ loadState: SUBMITSTATE.SUBMITTED_KO });
+        formInstance.setState({ submitState: SUBMITSTATE.SUBMITTED_KO });
         const errorInfo = ErrorManagement.getAllErrors(error);
         throw new SubmissionError(errorInfo);
     }
 }
 
 export const isSubmitting = (formInstance) => {
-    return formInstance.state.loadState === SUBMITSTATE.SUBMITTING;
+    return formInstance.state.submitState === SUBMITSTATE.SUBMITTING;
 }
 
 export const showDialog = (formName) => {
