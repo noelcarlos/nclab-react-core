@@ -39,7 +39,6 @@ class AfePopupComponent extends Component {
               </div>
             </div>
           </div>
-
       </Fragment>
     );
   }
