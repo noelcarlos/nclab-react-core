@@ -1,4 +1,6 @@
 
+import {_t} from "./Translator";
+
 export const dateToStr = (data) => {
     if (data === null || data === undefined)
         return "";
@@ -63,3 +65,9 @@ export const timeShortToStr = (data) => {
     });
 }
 
+export const format = (fmt, ...theArgs) => {
+    return fmt.replace(/\{(\d+)\}/g, function(v) {
+      	const index = v[1];
+        return theArgs[index];
+    });
+}
