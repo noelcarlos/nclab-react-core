@@ -54,6 +54,9 @@ export const Select = ({
   label,
   children,
   disabled,
+  options,
+  optionLabel = "label",
+  optionId = "id",
   ...restProps
 }) => {
   const classError = (touched && (error || warning)) ? "form-control col-md-12 mb-2 is-invalid" : "form-control col-md-12 mb-2";
@@ -69,6 +72,7 @@ export const Select = ({
         {...restInput}
       >
         {children}
+        {options && options.map(data => <option key={data[optionId]} value={data[optionId]}>{data[optionLabel]}</option>)}
       </select>
       {touched &&
         ((error && <div className="text-danger" role="alert">{error}</div>) ||

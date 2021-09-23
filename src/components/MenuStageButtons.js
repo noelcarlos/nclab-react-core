@@ -10,8 +10,8 @@ export default class MenuStageButtons extends Component {
       return (
         <ul className={"stage-menu " + (this.props.className ? this.props.className : "")}>
           {options.map(data => 
-            <li>
-            <a key={data.id} href="#" className={classNames(
+            <li key={data.id}>
+            <a href="#" className={classNames(
               {
                 "current": data.id === value
               })} onClick={ () => onChange(data.id, value) } 
