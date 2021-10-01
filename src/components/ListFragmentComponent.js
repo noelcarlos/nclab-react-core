@@ -103,9 +103,6 @@ export class ListFragmentFilterBuilder {
 
   filters = {};
 
-  constructor() {
-  }
-
   boolean = (property, label, value) => {
     if (value !== null && value !== undefined && property !== null && property !== undefined) {
       this.filters[property] = { type: "MATCH", field: property, label: label + " : " 

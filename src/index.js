@@ -7,6 +7,7 @@ export {default as ListFragmentComponent, FilterTagList, ListFragmentViewType, L
 export {default as EditPopupFragmentComponent} from './components/EditPopupFragmentComponent';
 export {default as Pagination} from './components/Pagination';
 
+export * as Card from './components/Card';
 export * as AfeForms from './util/AfeForms';
 export * as AfeFormatter from './util/AfeFormatter';
 export * as ErrorManagement from './util/ErrorManagement';

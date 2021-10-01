@@ -13,7 +13,7 @@ export default class MenuGroupButtons extends Component {
             <button key={data.id} type="button" className={classNames(
               "btn",
               {
-                "btn-secondary": data.id !== value,
+                "btn-outline-dark": data.id !== value,
                 "btn-primary": data.id === value
               })} onClick={ () => onChange(data.id, value) } 
               >{data.label} {data.counter !== undefined && <span className="badge badge-info"> {data.counter !== undefined ? data.counter : 0} </span>}</button>
