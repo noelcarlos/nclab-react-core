@@ -1,5 +1,5 @@
 import * as ErrorManagement from "./ErrorManagement";
-import { stopAsyncValidation, SubmissionError } from 'redux-form';
+import { stopAsyncValidation, SubmissionError, change } from 'redux-form';
 import { LOADSTATE, SUBMITSTATE } from "../components/AfeFields";
 
 export const loadData = async (formInstance, fn, dispatch) => {
@@ -54,3 +54,35 @@ export const hideDialog = (formName) => {
     window.$('#' + formName + 'Dialog').modal('hide');
 }
 
+export const useLoadData = ({formName, setLoadState, dispatch, load} = options) => {
+    return { 
+        loadData: async () => { 
+            try {
+                setLoadState(LOADSTATE.LOADING);
+                await load();
+                setLoadState(LOADSTATE.LOADED_OK);
+            } catch (error) {
+                setLoadState(LOADSTATE.LOADED_KO);
+                const allErrors = ErrorManagement.getAllErrors(error);       
+                await dispatch(stopAsyncValidation(formName, allErrors));
+            }
+        }
+    }
+}
+
+export const usePaginatedListComponent = ({formName, setCurrentPage, currentPage, loadData, dispatch} = options) => {
+    return { 
+        onLoad: async (newCurrentPage) => {
+            setCurrentPage(newCurrentPage);
+            await loadData();
+        },       
+        onSortChange: async (sort) => {
+            await dispatch(change(formName, "sort", sort));
+            await loadData();
+        },
+        onSearch: async () => {
+            setCurrentPage(1);
+            loadData();
+        }
+    }
+}

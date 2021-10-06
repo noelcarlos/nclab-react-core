@@ -146,7 +146,6 @@ export default class ListFragmentComponent extends Component {
   state = {
     loadState: LOADSTATE.LOADING,
     submitState: SUBMITSTATE.NONE,
-    currentPage: 1,
     viewType: ListFragmentComponent.VIEW_TYPE_LIST,
     filters : { }
   }
@@ -226,9 +225,7 @@ export default class ListFragmentComponent extends Component {
   }*/
 
   onPageChange = (newPage) => {
-    this.setState({currentPage: newPage}, () => {
-      this.onLoad(this.state.currentPage);
-    });
+    this.onLoad(newPage);
   }
 
   render() {
@@ -287,8 +284,8 @@ export default class ListFragmentComponent extends Component {
                 <Pagination
                   hideFirstLastPages
                   pageRangeDisplayed={5}
-                  activePage={this.state.currentPage}
-                  itemsCountPerPage={10}
+                  activePage={this.props.currentPage}
+                  itemsCountPerPage={5}
                   totalItemsCount={this.props.totalElements}
                   onChange={this.onPageChange}
                 />

@@ -20,12 +20,12 @@ export class AfeLoading extends Component {
 
     return (<Fragment>
       {(loadState === LOADSTATE.LOADING) && 
-        <div data-testid="formMessageLoading" role="formMessageLoading">
-           <span className="spinner-border spinner-border-xl mr-2 text-primary"></span>
+        <div className="wait-spinner" data-testid="formMessageLoading" role="formMessageLoading">
+           <span className="spinner-border spinner-border-xl mr-2 text-secondary-variant"></span>Cargando...
         </div>}
       {(submitState === SUBMITSTATE.SUBMITTING) && 
-        <div data-testid="formMessageSubmiting" role="formMessageSubmiting">
-          <span className="spinner-border spinner-border-xl mr-2 text-primary"></span>
+        <div className="wait-spinner" data-testid="formMessageSubmiting" role="formMessageSubmiting">
+          <span className="spinner-border spinner-border-xl mr-2 text-secondary-variant"></span>Enviando...
         </div>}
     </Fragment>);
   }
