@@ -1,6 +1,6 @@
 {
-  "short_name": "nclab-react-core",
-  "name": "nclab-react-core",
+  "short_name": shared-bigblue-react-core,
+  "name": shared-bigblue-react-core,
   "icons": [
     {
       "src": "favicon.ico",

@@ -45,7 +45,7 @@ yarn start
 En la carpeta del proyecto donde se va a usar
 ```bash
 yarn 
-sudo yarn link "nclab-react-core" 
+sudo yarn link shared-bigblue-react-core 
 yarn start
 ```
 ## Upgrade node version
